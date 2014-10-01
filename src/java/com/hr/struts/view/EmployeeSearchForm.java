@@ -15,6 +15,7 @@ public class EmployeeSearchForm extends ActionForm {
 
     private String name = null;
     private String ssNum = null;
+    private String phone = null;
     private List results = null;
 
     public void setName(String name) {
@@ -33,6 +34,14 @@ public class EmployeeSearchForm extends ActionForm {
         return ssNum;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public void setResults(List results) {
         this.results = results;
     }
@@ -42,40 +51,54 @@ public class EmployeeSearchForm extends ActionForm {
     }
 
     // Reset form fields.
+    @Override
     public void reset(ActionMapping map, HttpServletRequest req) {
         name = null;
         ssNum = null;
+        phone = null;
         results = null;
     }
-    
+
     // Validate form data.
+    @Override
     public ActionErrors validate(ActionMapping mapping,
             HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
         boolean nameEntered = false;
         boolean ssNumEntered = false;
-        
+        boolean phoneEntered = false;
+
         // Determine if name has been entered. 
         if (name != null && name.length() > 0) {
             nameEntered = true;
         }
-        
+
         // Determine if social security number has been entered. 
         if (ssNum != null && ssNum.length() > 0) {
             ssNumEntered = true;
         }
-        
-        /* Validate that either name or social security number has been entered. */
-        if (!nameEntered && !ssNumEntered) {
+
+        // Determine if phone has been entered. 
+        if (phone != null && phone.length() > 0) {
+            phoneEntered = true;
+        }
+
+        /* Validate that either name or social security number or phone has been entered. */
+        if (!nameEntered && !ssNumEntered && !phoneEntered) {
             errors.add(null,
                     new ActionMessage("error.search.criteria.missing"));
         }
-        
+
         /* Validate format of social security number if it has been entered. */
         if (ssNumEntered && !isValidSsNum(ssNum.trim())) {
             errors.add("ssNum",
                     new ActionMessage("error.search.ssNum.invalid"));
         }
+        
+        if(phoneEntered && !isValidPhone(phone.trim())){
+            errors.add("phone", new ActionMessage("error.search.phone.invalid"));
+        }
+        
         return errors;
     }
 
@@ -84,13 +107,26 @@ public class EmployeeSearchForm extends ActionForm {
         if (ssNum.length() < 11) {
             return false;
         }
-        
+
         for (int i = 0; i < 11; i++) {
             if (i == 3 || i == 6) {
                 if (ssNum.charAt(i) != '-') {
                     return false;
                 }
             } else if ("0123456789".indexOf(ssNum.charAt(i)) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    // Validate format of phone. 
+    private static boolean isValidPhone(String phone) {
+        if (phone.length() < 10) {
+            return false;
+        }
+        for (int i = 0; i < 10; i++) {
+            if ("0123456789".indexOf(phone.charAt(i)) == -1) {
                 return false;
             }
         }

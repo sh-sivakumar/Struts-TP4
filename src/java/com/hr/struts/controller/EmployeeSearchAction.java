@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 
 public final class EmployeeSearchAction extends Action {
 
+    @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -22,10 +23,14 @@ public final class EmployeeSearchAction extends Action {
         
         // Perform employee search based on the criteria entered. 
         String name = searchForm.getName();
+        String ssNum = searchForm.getSsNum();
+        String phone = searchForm.getPhone();
         if (name != null && name.trim().length() > 0) {
             results = service.searchByName(name);
-        } else {
-            results = service.searchBySsNum(searchForm.getSsNum().trim());
+        } else if(ssNum != null && ssNum.trim().length() > 0) {
+            results = service.searchBySsNum(ssNum.trim());
+        } else{
+            results = service.searchByPhone(phone.trim());
         }
         
         // Place search results in EmployeeSearchForm bean for access in the JSP. 
