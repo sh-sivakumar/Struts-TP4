@@ -50,9 +50,9 @@
         <logic:greaterThan name="size" value="0"> 
             <table border="1">
                 <tr> 
-                    <th>Name</th>
-                    <th>Social Security Number</th> 
-                    <th>Phone</th>
+                    <th><bean:message key="label.search.name"/></th>
+                    <th><bean:message key="label.search.ssNum"/></th> 
+                    <th><bean:message key="label.search.phone"/></th>
                 </tr>
                 <logic:iterate id="result" name="employeeSearchForm" property="results">
                     <tr>
