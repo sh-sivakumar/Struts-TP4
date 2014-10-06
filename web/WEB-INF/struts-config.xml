@@ -7,7 +7,16 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="employeeSearchForm" type="com.hr.struts.view.EmployeeSearchForm"/>
+        <form-bean name="employeeSearchForm" 
+                   type="com.hr.struts.view.EmployeeSearchForm"/>
+        <form-bean name="employeesShowForm"
+                   type="com.hr.struts.view.EmployeesShowForm"/>
+        <form-bean name="addEmployeeForm"
+                   type="com.hr.struts.view.AddEmployeeForm"/>
+        <form-bean name="deleteEmployeeForm"
+                   type="com.hr.struts.view.DeleteEmployeeForm"/>
+        <form-bean name="updateEmployeeForm"
+                   type="com.hr.struts.view.UpdateEmployeeForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -17,6 +26,10 @@
     <global-forwards>
         <forward name="welcome"  path="/Welcome.do"/>
         <forward name="search" path="searchEmployee.jsp"/>
+        <forward name="showAll" path="showEmployees.jsp"/>
+        <forward name="add" path="addEmployee.jsp"/>
+        <forward name="delete" path="deleteEmployee.jsp"/>
+        <forward name="update" path="updateEmployee.jsp"/>
     </global-forwards>
 
     <action-mappings>
@@ -28,6 +41,42 @@
                 scope="request"
                 validate="true"
                 input="/searchEmployee.jsp">
+        </action>
+        <action path="/showEmployees"
+            type="com.hr.struts.controller.EmployeesShowAction"
+            name="employeesShowForm"
+            scope="request"
+            validate="true"
+            input="/showEmployees.jsp">
+            <forward name="succes" path="/showEmployees.jsp"/>
+            <forward name="echec" path="/menu.jsp"/>
+        </action>
+        <action path="/addEmployee"
+            type="com.hr.struts.controller.AddEmployeeAction"
+            name="addEmployeeForm"
+            scope="request"
+            validate="true"
+            input="/addEmployee.jsp">
+            <forward name="succes" path="/showEmployees.jsp"/>
+            <forward name="echec" path="/menu.jsp"/>
+        </action>
+        <action path="/deleteEmployee"
+            type="com.hr.struts.controller.DeleteEmployeeAction"
+            name="deleteEmployeeForm"
+            scope="request"
+            validate="true"
+            input="/deleteEmployee.jsp">
+            <forward name="succes" path="/showEmployees.jsp"/>
+            <forward name="echec" path="/menu.jsp"/>
+        </action>
+        <action path="/updateEmployee"
+            type="com.hr.struts.controller.UpdateEmployeeAction"
+            name="updateEmployeeForm"
+            scope="request"
+            validate="true"
+            input="/updateEmployee.jsp">
+            <forward name="succes" path="/showEmployees.jsp"/>
+            <forward name="echec" path="/menu.jsp"/>
         </action>
     </action-mappings>
     

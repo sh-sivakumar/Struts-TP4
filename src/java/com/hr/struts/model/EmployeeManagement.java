@@ -8,6 +8,15 @@ import java.util.List;
 public class EmployeeManagement {
     /* Hard-coded sample data. Normally this would come from a real data source: database */
 
+    private static EmployeeManagement instance;
+
+    public static EmployeeManagement getInstance() {
+        if (null == instance) {
+            instance = new EmployeeManagement();
+        }
+        return instance;
+    }
+
     private static final List<Employee> employees = new ArrayList<>(Arrays.asList(
             new Employee("Bob Davidson", "123-45-6789", "0102030405"),
             new Employee("Mary Williams", "987-65-4321", "0000000000"),
@@ -38,12 +47,12 @@ public class EmployeeManagement {
         }
         return resultList;
     }
-    
+
     // Search for employee by phone.
-    public ArrayList searchByPhone(String phone){
+    public ArrayList searchByPhone(String phone) {
         ArrayList resultList = new ArrayList();
-        for(Employee employee : employees){
-            if(employee.getPhone().equals(phone)){
+        for (Employee employee : employees) {
+            if (employee.getPhone().equals(phone)) {
                 resultList.add(employee);
             }
         }
@@ -58,8 +67,8 @@ public class EmployeeManagement {
     public ArrayList findAll() {
         return (ArrayList) employees;
     }
-    
-    public boolean add(String name, String ssNum, String phone){
+
+    public boolean add(String name, String ssNum, String phone) {
         employees.add(new Employee(name, ssNum, phone));
         return true;
     }
