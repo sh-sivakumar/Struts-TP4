@@ -22,15 +22,14 @@ import org.apache.struts.action.ActionMessages;
  *
  * @author Sinthu
  */
-public final class EmployeesShowAction extends Action
+public final class EmployeesShowAction extends SuperAction
 {
   public ActionForward execute(ActionMapping mapping,
-     					 ActionForm form,
+     					ActionForm form,
     					HttpServletRequest request,
     					HttpServletResponse response)
   throws Exception
   {
-    EmployeeManagement service = new EmployeeManagement();
     ArrayList results;
    
     EmployeesShowForm showForm = (EmployeesShowForm) form;

@@ -24,14 +24,13 @@ import org.apache.struts.action.ActionMessages;
  *
  * @author Sinthu
  */
-public final class DeleteEmployeeAction extends Action {
+public final class DeleteEmployeeAction extends SuperAction {
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
             HttpServletRequest request,
             HttpServletResponse response)
             throws Exception {
-        EmployeeManagement service = new EmployeeManagement();
         boolean results = true;
 
         DeleteEmployeeForm deleteEmp = (DeleteEmployeeForm) form;

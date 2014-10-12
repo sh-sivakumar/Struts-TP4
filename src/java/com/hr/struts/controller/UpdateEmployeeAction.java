@@ -25,14 +25,14 @@ import org.apache.struts.action.ActionMessages;
  *
  * @author Sinthu
  */
-public final class UpdateEmployeeAction extends Action {
+public final class UpdateEmployeeAction extends SuperAction {
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
             HttpServletRequest request,
             HttpServletResponse response)
             throws Exception {
-        EmployeeManagement service = new EmployeeManagement();
+
         boolean results = true;
 
         UpdateEmployeeForm updateEmp = (UpdateEmployeeForm) form;
@@ -42,11 +42,11 @@ public final class UpdateEmployeeAction extends Action {
         name = (String) request.getParameter("name");
         phone = (String) request.getParameter("phone");
         ArrayList<Employee> listEmp = service.searchBySsNum(ssNum);
-        
-        for(int i=0;i<listEmp.size();i++) {
+
+        for (int i = 0; i < listEmp.size(); i++) {
             boolean res;
             res = service.update(listEmp.get(i), name, ssNum, phone);
-            if(!res) {
+            if (!res) {
                 results = false;
             }
         }
