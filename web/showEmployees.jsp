@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Show All the Employees</h1>
+        <h1><bean:message key="title.show.employee"/></h1>
 
         <html:form action="/showEmployees"> 
             <html:submit/>
@@ -25,15 +25,15 @@
             <bean:size id="size" name="employeesShowForm" property="results"/> 
             <logic:equal name="size" value="0">
             <center>
-                <font color="red"> <b>No employees Found</b></font>
+                <font color="red"> <b><bean:message key="error.show.employees.notfound"/></b></font>
             </center> 
         </logic:equal>
 
         <logic:greaterThan name="size" value="0">
             <table border="1">
                 <tr>
-                    <th>Name</th>
-                    <th>Social Security Number</th>
+                    <th><bean:message key="label.search.name"/></th>
+                    <th><bean:message key="label.search.ssNum"/></th>
                 </tr>
                 <logic:iterate id="result" name="employeesShowForm" property="results">
                     <tr>

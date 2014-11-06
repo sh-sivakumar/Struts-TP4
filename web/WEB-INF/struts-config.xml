@@ -8,15 +8,15 @@
 <struts-config>
     <form-beans>
         <form-bean name="employeeSearchForm" 
-                   type="com.hr.struts.view.EmployeeSearchForm"/>
+                   type="org.apache.struts.validator.LazyValidatorForm"/>
         <form-bean name="employeesShowForm"
-                   type="com.hr.struts.view.EmployeesShowForm"/>
+                   type="org.apache.commons.beanutils.LazyDynaBean"/>
         <form-bean name="addEmployeeForm"
-                   type="com.hr.struts.view.AddEmployeeForm"/>
+                   type="org.apache.struts.validator.LazyValidatorForm"/>
         <form-bean name="deleteEmployeeForm"
-                   type="com.hr.struts.view.DeleteEmployeeForm"/>
+                   type="org.apache.struts.validator.LazyValidatorForm"/>
         <form-bean name="updateEmployeeForm"
-                   type="com.hr.struts.view.UpdateEmployeeForm"/>
+                   type="org.apache.struts.validator.LazyValidatorForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -24,7 +24,6 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="welcome"  path="/Welcome.do"/>
         <forward name="search" path="searchEmployee.jsp"/>
         <forward name="showAll" path="showEmployees.jsp"/>
         <forward name="add" path="addEmployee.jsp"/>
@@ -33,47 +32,51 @@
     </global-forwards>
 
     <action-mappings>
-        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
         <action path="/index" forward="/menu.jsp"/>
         
-        <action path="/searchEmployee" type="com.hr.struts.controller.EmployeeSearchAction" 
+        <action path="/searchEmployee" type="com.hr.struts.controller.Employee" 
                 name="employeeSearchForm"
                 scope="request"
                 validate="true"
+                parameter="searchEmployee"
                 input="/searchEmployee.jsp">
         </action>
         <action path="/showEmployees"
-            type="com.hr.struts.controller.EmployeesShowAction"
+            type="com.hr.struts.controller.Employee"
             name="employeesShowForm"
             scope="request"
             validate="true"
+            parameter="showEmployees"
             input="/showEmployees.jsp">
             <forward name="succes" path="/showEmployees.jsp"/>
             <forward name="echec" path="/menu.jsp"/>
         </action>
         <action path="/addEmployee"
-            type="com.hr.struts.controller.AddEmployeeAction"
+            type="com.hr.struts.controller.Employee"
             name="addEmployeeForm"
             scope="request"
             validate="true"
+            parameter="addEmployee"
             input="/addEmployee.jsp">
             <forward name="succes" path="/showEmployees.jsp"/>
             <forward name="echec" path="/menu.jsp"/>
         </action>
         <action path="/deleteEmployee"
-            type="com.hr.struts.controller.DeleteEmployeeAction"
+            type="com.hr.struts.controller.Employee"
             name="deleteEmployeeForm"
             scope="request"
             validate="true"
+            parameter="deleteEmployee"
             input="/deleteEmployee.jsp">
             <forward name="succes" path="/showEmployees.jsp"/>
             <forward name="echec" path="/menu.jsp"/>
         </action>
         <action path="/updateEmployee"
-            type="com.hr.struts.controller.UpdateEmployeeAction"
+            type="com.hr.struts.controller.Employee"
             name="updateEmployeeForm"
             scope="request"
             validate="true"
+            parameter="updateEmployee"
             input="/updateEmployee.jsp">
             <forward name="succes" path="/showEmployees.jsp"/>
             <forward name="echec" path="/menu.jsp"/>
@@ -82,7 +85,9 @@
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
 
-    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    <message-resources parameter="com.myapp.struts.ApplicationResource"/>  
+    <message-resources parameter="com.myapp.struts.ApplicationResource_fr_FR"/> 
+
     
     <!-- ========================= Tiles plugin ===============================-->
     <!--
@@ -121,6 +126,10 @@
         <set-property
             property="pathnames"
             value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+    
+    <plug-in className="com.hr.struts.plugin.PluginLecture" >
+        <set-property property="filePath" value="/Users/franckmazzolo/NetBeansProjects/HRStruts/src/java/com/myapp/struts/config.properties" />
     </plug-in>
   
 </struts-config>

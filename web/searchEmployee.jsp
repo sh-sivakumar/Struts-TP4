@@ -4,11 +4,11 @@
 
 <html>
     <head>
-        <title> Portal for Employee Management - Employee Search</title> </head>
+        <title> <bean:message key="title.portal.employee"/> - <bean:message key="title.search.employee"/></title> </head>
     <body>
 
         <font size="+1">
-        Portal for Employee Management - Employee Search </font><br>
+        <bean:message key="title.portal.employee"/> - <bean:message key="title.search.employee"/> </font><br>
         <hr width="100%" noshade="true">
         <html:errors/>
         <html:form action="/searchEmployee"> 
@@ -44,7 +44,7 @@
             <hr width="100%" size="1" noshade="true">
             <bean:size id="size" name="employeeSearchForm" property="results"/> 
             <logic:equal name="size" value="0">
-            <center><font color="red">No Employees Found</font></center> 
+            <center><font color="red"><bean:message key="error.show.employees.notfound"/></font></center> 
             </logic:equal>
 
         <logic:greaterThan name="size" value="0"> 

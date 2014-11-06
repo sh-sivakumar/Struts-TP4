@@ -12,9 +12,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Employee</title>
+        <title><bean:message key="title.add.employee"/></title>
     </head>
     <body>
+        <html:errors/>
         <html:form action="/addEmployee">
             <table>
                 <tr>

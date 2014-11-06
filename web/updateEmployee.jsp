@@ -12,14 +12,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Employee</title>
+        <title><bean:message key="title.update.employee"/></title>
     </head>
     <body>
+        <html:errors/>
         <html:form action="/updateEmployee">
             <table>
                 <tr>
                     <td align="right"><bean:message key="label.search.ssNum"/>:</td>
-                    <td><html:text property="ssNum"/>(xxx-xx-xxxx) - ne change jamais</td>
+                    <td><html:text property="ssNum"/>(xxx-xx-xxxx) - <bean:message key="info.ssnum.employee"/></td>
                 </tr>
                 <tr>
                     <td align="right"><bean:message key="label.search.name"/>:</td>

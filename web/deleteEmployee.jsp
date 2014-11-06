@@ -12,9 +12,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Delete Employee</title>
+        <title><bean:message key="title.delete.employee"/></title>
     </head>
     <body>
+        <html:errors/>
         <html:form action="/deleteEmployee">
             <table>
                 <tr>
